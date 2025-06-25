@@ -1,0 +1,228 @@
+@font-face {
+  font-family: "Mini Wakuwaku";
+  src: url("fonts/mini-wakuwaku.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Mini Wakuwaku Maru";
+  src: url("fonts/mini-wakuwaku-maru.otf") format("opentype");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Mini Wakuwaku", "Nunito", sans-serif;
+  background: #e5dcca;
+  color: #e5ae33;
+  overflow: hidden;
+}
+
+#flashlight {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  background: radial-gradient(
+    circle 180px at var(--x) var(--y),
+    transparent 0%,
+    rgba(0, 0, 0, 0.1) 25%,
+    rgba(0, 0, 0, 0.4) 45%,
+    rgba(0, 0, 0, 0.7) 65%,
+    rgba(0, 0, 0, 0.85) 80%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
+  mix-blend-mode: multiply;
+  transition: background 0.08s ease-out;
+}
+
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: url("ramen-shop-bg.jpg") center/cover no-repeat;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-family: "Mini Wakuwaku Maru", "Mini Wakuwaku", sans-serif;
+  color: #d86036;
+}
+
+.hero p {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.light-switch-container {
+  position: absolute;
+  bottom: 5vh;
+  right: 5vw;
+  z-index: 10;
+}
+
+.switch-plate {
+  background: #2a2a2a;
+  width: 80px;
+  height: 120px;
+  border-radius: 8px;
+  border: 2px solid #1a1a1a;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  position: relative;
+}
+
+.light-switch {
+  width: 50px;
+  height: 80px;
+  background: linear-gradient(135deg, #404040 0%, #2a2a2a 100%);
+  border: 2px solid #1a1a1a;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 8px;
+}
+
+.light-switch:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.switch-toggle {
+  width: 38px;
+  height: 20px;
+  background: linear-gradient(135deg, #505050 0%, #3a3a3a 100%);
+  border: 1px solid #1a1a1a;
+  border-radius: 3px;
+  position: relative;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+.light-switch.on {
+  align-items: flex-start;
+  padding-bottom: 0;
+  padding-top: 8px;
+}
+
+.light-switch.on .switch-toggle {
+  background: linear-gradient(135deg, #606060 0%, #4a4a4a 100%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  animation: toggleSlideUp 0.4s ease-out forwards;
+}
+
+.light-switch:not(.on) .switch-toggle {
+  animation: toggleSlideDown 0.4s ease-out forwards;
+}
+
+.switch-label {
+  margin-top: 8px;
+  font-size: 10px;
+  color: #888;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+body.lights-on {
+  background: #f9f6f0;
+}
+
+body.lights-on #flashlight {
+  display: none;
+}
+
+body.lights-on .switch-plate {
+  background: #f5f5f5;
+  border: 2px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+body.lights-on .light-switch {
+  background: linear-gradient(135deg, #ffffff 0%, #e8e8e8 100%);
+  border: 2px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+body.lights-on .switch-toggle {
+  background: linear-gradient(135deg, #f0f0f0 0%, #d0d0d0 100%);
+  border: 1px solid #999;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6);
+}
+
+body.lights-on .light-switch.on .switch-toggle {
+  background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  animation: toggleSlideUp 0.4s ease-out forwards;
+}
+
+body.lights-on .light-switch:not(.on) .switch-toggle {
+  animation: toggleSlideDown 0.4s ease-out forwards;
+}
+
+body.lights-on .switch-label {
+  color: #666;
+}
+
+@keyframes toggleSlideUp {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-1.25px);
+  }
+  50% {
+    transform: translateY(-2.5px);
+  }
+  75% {
+    transform: translateY(-3.75px);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes toggleSlideDown {
+  0% {
+    transform: translateY(-5px);
+  }
+  25% {
+    transform: translateY(-3.75px);
+  }
+  50% {
+    transform: translateY(-2.5px);
+  }
+  75% {
+    transform: translateY(-1.25px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
