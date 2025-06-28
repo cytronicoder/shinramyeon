@@ -7,10 +7,42 @@
   <body>
     <div id="flashlight"></div>
 
-    <header class="hero">
+    <div class="warm-zone zone-1" data-warmth="0.8"></div>
+    <div class="warm-zone zone-2" data-warmth="0.6"></div>
+    <div class="warm-zone zone-3" data-warmth="0.9"></div>
+
+    <!-- <header class="hero">
       <h1>Happy birthday!</h1>
       <p>Shine your light and explore ↓</p>
-    </header>
+    </header> -->
+    
+    <div class="countdown-container">
+      <div class="alarm-clock">
+        <div class="clock-face">
+          <div class="countdown-display">
+            <div class="time-units">
+              <div class="time-unit">
+                <span class="number" id="days">00</span>
+                <span class="label">Days</span>
+              </div>
+              <div class="time-unit">
+                <span class="number" id="hours">00</span>
+                <span class="label">Hours</span>
+              </div>
+              <div class="time-unit">
+                <span class="number" id="minutes">00</span>
+                <span class="label">Minutes</span>
+              </div>
+              <div class="time-unit">
+                <span class="number" id="seconds">00</span>
+                <span class="label">Seconds</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clock-base"></div>
+      </div>
+    </div>
 
     <div class="light-switch-container">
       <div class="switch-plate">

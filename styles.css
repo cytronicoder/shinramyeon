@@ -12,6 +12,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  cursor: url("cursor.png"), auto;
 }
 
 body {
@@ -19,6 +20,10 @@ body {
   background: #e5dcca;
   color: #e5ae33;
   overflow: hidden;
+}
+
+body.lights-on {
+  background: #f9f6f0;
 }
 
 #flashlight {
@@ -42,6 +47,54 @@ body {
   z-index: 1000;
 }
 
+.warm-zone {
+  position: absolute;
+  z-index: 5;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.zone-1 {
+  width: 200px;
+  height: 200px;
+  top: 20%;
+  left: 15%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 147, 41, 0.3) 0%,
+    transparent 70%
+  );
+}
+
+.zone-2 {
+  width: 150px;
+  height: 150px;
+  top: 60%;
+  right: 20%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 184, 108, 0.25) 0%,
+    transparent 70%
+  );
+}
+
+.zone-3 {
+  width: 180px;
+  height: 180px;
+  top: 40%;
+  left: 60%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 123, 67, 0.35) 0%,
+    transparent 70%
+  );
+}
+
+body.lights-on .warm-zone {
+  display: none;
+}
+
 .hero {
   height: 100vh;
   display: flex;
@@ -49,7 +102,137 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: url("ramen-shop-bg.jpg") center/cover no-repeat;
+  /* background: url("ramen-shop-bg.jpg") center/cover no-repeat; */
+}
+
+.countdown-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+}
+
+.alarm-clock {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.clock-face {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #2c2c2c, #1a1a1a);
+  border: 8px solid #444;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.8),
+    inset 0 0 20px rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.clock-face::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(145deg, #333, #222);
+  border-radius: 50%;
+  border: 2px solid #555;
+}
+
+.countdown-display {
+  text-align: center;
+  color: rgba(229, 174, 51, 0.3);
+  text-shadow: 0 0 2px rgba(229, 174, 51, 0.2), 0 0 4px rgba(229, 174, 51, 0.1);
+  animation: glow 4s ease-in-out infinite alternate;
+}
+
+.time-units {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.time-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.number {
+  font-size: 2rem;
+  font-family: "Mini Wakuwaku", monospace;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.label {
+  font-size: 0.7rem;
+  font-family: "Mini Wakuwaku", monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 3px;
+  opacity: 0.7;
+}
+
+.clock-base {
+  width: 340px;
+  height: 60px;
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  border-radius: 15px;
+  margin-top: -20px;
+  border: 3px solid #333;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5),
+    inset 0 2px 5px rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.clock-base::before {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 20px;
+  background: linear-gradient(145deg, #222, #111);
+  border-radius: 10px;
+  border: 2px solid #333;
+}
+
+body.lights-on .countdown-display {
+  color: #666;
+  text-shadow: none;
+  animation: none;
+}
+
+body.lights-on .clock-face {
+  background: linear-gradient(145deg, #f0f0f0, #e0e0e0);
+  border-color: #ccc;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+body.lights-on .clock-base {
+  background: linear-gradient(145deg, #e8e8e8, #d0d0d0);
+  border-color: #bbb;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 2px rgba(229, 174, 51, 0.2),
+      0 0 4px rgba(229, 174, 51, 0.1);
+  }
+  to {
+    text-shadow: 0 0 3px rgba(229, 174, 51, 0.3),
+      0 0 6px rgba(229, 174, 51, 0.15);
+  }
 }
 
 .hero h1 {
@@ -94,7 +277,6 @@ body {
   background: linear-gradient(135deg, #404040 0%, #2a2a2a 100%);
   border: 2px solid #1a1a1a;
   border-radius: 6px;
-  cursor: pointer;
   position: relative;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4),
     inset 0 1px 2px rgba(255, 255, 255, 0.1);
@@ -146,10 +328,6 @@ body {
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-}
-
-body.lights-on {
-  background: #f9f6f0;
 }
 
 body.lights-on #flashlight {
