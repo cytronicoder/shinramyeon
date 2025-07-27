@@ -12,7 +12,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  cursor: url("cursor.png"), auto;
 }
 
 body {
@@ -91,17 +90,24 @@ body.lights-on {
   );
 }
 
+body:not(.lights-on) {
+  cursor: url("cursor.png"), auto;
+}
+
 body.lights-on .warm-zone {
   display: none;
+  cursor: none;
 }
 
 .hero {
-  height: 100vh;
+  min-width: 50vw;
+  min-height: 50vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  z-index: 1;
   /* background: url("ramen-shop-bg.jpg") center/cover no-repeat; */
 }
 
@@ -368,6 +374,43 @@ body.lights-on .light-switch:not(.on) .switch-toggle {
 
 body.lights-on .switch-label {
   color: #666;
+}
+
+#cake-container {
+  position: absolute;
+  bottom: 15vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 300px;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#cake-container.visible {
+  opacity: 1;
+}
+
+#cake-canvas {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.cake-instructions {
+  text-align: center;
+  color: #e5ae33;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  border-radius: 15px;
+}
+
+body.lights-on .cake-instructions {
+  background: rgba(255, 255, 255, 0.8);
+  color: #d86036;
 }
 
 @keyframes toggleSlideUp {
