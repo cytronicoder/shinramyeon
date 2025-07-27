@@ -1,0 +1,23 @@
+name: Birthday Auto Merge
+description: Automatically merges the cake PR on August 3rd
+
+on:
+  schedule:
+    - cron: "55 14 2 8 *"
+  workflow_dispatch:
+    inputs:
+      pr-number:
+        description: "PR number to merge"
+        required: true
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merge Pull Request
+        uses: juliangruber/merge-pull-request-action@v1.3.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ github.event.inputs.pr-number || '2' }}
+          method: squash
+          repo: ${{ github.repository }}
